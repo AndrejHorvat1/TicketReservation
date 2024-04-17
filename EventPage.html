@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <title>Ticket Reservation</title>
+</head>
+<body class="grey lighter-3">
+<div id="root"></div>
+      <!-- NAVBAR -->
+  <nav class="z-depth-0 grey lighten-4">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">
+        <a href="index.html" class="black-text modal-trigger" >Ticekt Reservation</a>
+      </a>
+      <a href="#" class="sidenav-trigger" data-target="mobile-nav">
+      <i class="material-icons black-text">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+          <li class="logged-in" style="display: none;">
+            <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+          </li>
+          <li class="logged-in" style="display: none;">
+            <a href="#" class="grey-text" id="logout">Logout</a>
+          </li>
+          <li class="logged-in" id="admin" style="display: none;">
+            <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Event</a>
+          </li>
+          <li class="logged-out" style="display: none;">
+            <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+          </li>
+          <li class="logged-out" style="display: none;">
+            <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+  <ul class="black sidenav" id="mobile-nav">
+    <li class="logged-in" style="display: none;">
+      <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+    </li>
+    <li class="logged-in" style="display: none;">
+      <a href="#" class="grey-text" id="logout">Logout</a>
+    </li>
+    <li class="logged-in" id="admin" style="display: none;">
+      <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Event</a>
+    </li>
+    <li class="logged-out" style="display: none;">
+      <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+    </li>
+    <li class="logged-out" style="display: none;">
+      <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+    </li>
+</ul>
+<script>
+ $(document).ready(function(){
+    $('.sidenav').sidenav();});
+</script>
+
+<!-- SIGN UP MODAL -->
+<div id="modal-signup" class="modal">
+  <div class="modal-content">
+    <h4>Sign up</h4><br />
+    <form id="signup-form">
+      <div class="input-field">
+        <input type="email" id="signup-email" required />
+        <label for="signup-email">Email address</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="signup-password" required />
+        <label for="signup-password">Choose password</label>
+      </div>
+      <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+    </form>
+  </div>
+</div>
+
+ <!-- LOGIN MODAL -->
+ <div id="modal-login" class="modal">
+  <div class="modal-content">
+    <h4>Login</h4><br />
+    <form id="login-form">
+      <div class="input-field">
+        <input type="email" id="login-email" required />
+        <label for="login-email">Email address</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="login-password" required />
+        <label for="login-password">Your password</label>
+      </div>
+      <button class="btn yellow darken-2 z-depth-0">Login</button>
+    </form>
+  </div>
+</div>
+
+<!-- ACCOUNT MODAL -->
+<div id="modal-account" class="modal">
+  <div class="modal-content center-align">
+    <h4>Account details</h4><br />
+    <div class="account-details"></div>
+    <form id="admin-form">
+      <p>Insert email to make admin:</p>
+    <div class="input-field">
+      <input type="text" id="account-make-admin" required>
+      <label for="account-make-admin">Insert email</label>
+    </div>
+    <button class="btn yellow darken-2 z-depth-0">Make admin</button>
+  </form>
+  </div>
+</div>
+
+
+<!-- CREATE EVENT MODAL -->
+<div id="modal-create" class="modal">
+<form id="create-form">
+  <div class="modal-content">
+    <h4>Create Event</h4>
+    <div class="input-field">
+      <input type="text" id="event-name" required>
+      <label for="event-name">Event Name</label>
+    </div>
+    <div class="input-field">
+      <input type="text" id="event-performer" required>
+      <label for="performer">Performer</label>
+    </div>
+    <div class="input-field">
+      <p>Event date</p>
+      <input type="datetime-local" id="event-date" required>
+    </div>
+    <div class="input-field"> 
+      <select id="event-type">
+        <option value disabled selected>Choose an event type</option>
+        <option value="Concert" > Concert</option>
+        <option value="Stand up" > Stand up</option>
+        <option value="Play" > Play</option>
+        <option value="Event" > Event</option>
+        <option value="Movie">Movie</option>
+      </select> 
+      <script>$(document).ready(function(){
+        $('select').formSelect();
+      });</script> 
+      </div>
+    <div class="input-field">
+      <input type="text" id="event-location" required>
+      <label for="event-location">Location</label>
+    </div>
+    <div class="input-field">
+      <textarea id="event-details" class="materialize-textarea"></textarea>
+      <label for="details">Details</label>
+    </div>
+    <div class="input-field">
+      <textarea id="event-price" class="materialize-textarea"></textarea>
+      <label for="price">Price</label>
+    </div>
+    <div class="input-field">
+      <input type="url" id="event-image" required>
+      <label for="event-image">Image url</label>   
+    </div>
+    <div class="input-field">
+      <input type="text" id="event-sections" required>
+      <label for="event-sections">Event sections</label>
+    </div>
+    <div class="input-field">
+      <input type="text" id="event-sections-tickets" required>
+      <label for="event-sections-tickets">Event sections tickets</label>
+    </div>
+  
+    <button type="submit" class="btn">Create</button>
+    <button class="modal-close btn-flat" onClick="clear">Close</button>
+  </div>
+</form>
+</div>
+
+<!-- Modal update -->
+<div id="modal-update" class="modal">
+  <form id="update-form">
+    <div class="modal-content">
+      <h4>Update Event</h4>
+      <div class="input-field">
+        <input type="text" id="event-name-update" required>
+        <label for="event-name">Event Name</label>
+      </div>
+      <div class="input-field">
+        <input type="text" id="event-performer-update" required>
+        <label for="performer">Performer</label>
+      </div>
+      <div class="input-field">
+        <p>Event date</p>
+        <input type="datetime-local" id="event-date-update" required>
+      </div>
+      <div class="input-field"> 
+        <select id="event-type-update">
+          <option value disabled selected>Choose an event type</option>
+          <option value="Concert" > Concert</option>
+          <option value="Stand up" > Stand up</option>
+          <option value="Play" > Play</option>
+          <option value="Event" > Event</option>
+          <option value="Movie">Movie</option>
+        </select> 
+        <script>$(document).ready(function(){
+          $('select').formSelect();
+        });</script> 
+        </div>
+      <div class="input-field">
+        <input type="text" id="event-location-update" required>
+        <label for="event-location">Location</label>
+      </div>
+      <div class="input-field">
+        <textarea id="event-details-update" class="materialize-textarea"></textarea>
+        <label for="details">Details</label>
+      </div>
+      <div class="input-field">
+        <textarea id="event-price-update" class="materialize-textarea"></textarea>
+        <label for="price">Price</label>
+      </div>
+      <div class="input-field">
+        <input type="url" id="event-image-update" required>
+        <label for="event-image">Image url</label>   
+      </div>
+      <div class="input-field">
+        <input type="text" id="event-sections-update" required>
+        <label for="event-sections">Event sections</label>
+      </div>
+      <div class="input-field">
+        <input type="text" id="event-sections-tickets-update" required>
+        <label for="event-sections-tickets">Event sections tickets</label>
+      </div>
+    
+      <button type="submit" id="update-btn-modal" class="btn">Update</button>
+      <button class="modal-close btn-flat" onClick="clear">Close</button>
+    </div>
+  </form>
+  </div>
+
+<div class="event-page">
+
+</div>
+<footer class="page-footer z-depth-0  grey darken-1">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="black-text">Ticket Reservation</h5>
+        <p class="black-text text-lighten-4">Reserve your tickets today</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright z-depth-0  grey darken-1 ">
+    <div class="container ">
+    © 2014 Copyright Text
+    </div>
+  </div>
+</footer>
+
+
+ <!-- Compiled and minified JavaScript -->
+ <script type="module" src="./scripts/eventpage.js"></script> 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ <script type="module" src="./scripts/firebase.js"></script>
+ <script type="module" src="./scripts/auth.js"></script>
+
+</body>
+</html>
